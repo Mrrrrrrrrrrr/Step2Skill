@@ -1,0 +1,70 @@
+{
+  "category": "delete_remove",
+  "goal": "在GUI序列（images+actions）中：先选关键帧，再基于关键帧判断删除移除任务是否完成（必须显示删除后的状态，如项目从列表中消失/列表更新）。",
+  "pipeline": ["select_keyframe", "judge_completion_by_keyframe"],
+  "select_keyframe": {
+    "must_include": [
+      "最后一个action对应的页面状态",
+      "删除操作后的状态页（列表更新/项目消失/删除成功提示/历史记录已清空），而非仅删除确认对话框",
+      "可验证的删除证据（项目从列表中消失/列表更新/删除成功提示/历史记录已清空/空列表状态至少其一可见）"
+    ],
+    "prefer": [
+      "同时可见：列表页面 + 目标项目已消失 + 列表更新后的状态",
+      "删除成功提示清晰可见（删除成功/已删除）",
+      "列表更新后的状态（项目数量减少/空列表状态/历史记录已清空）",
+      "目标项目已消失的明确证据（如第2件商品/第一件商品/指定项目已消失）"
+    ],
+    "avoid": [
+      "仅删除确认对话框（未确认删除）",
+      "删除前的列表页（项目仍在列表中）",
+      "仅选择页（未执行删除操作）",
+      "被弹窗/键盘遮挡导致看不到列表更新状态的页面"
+    ]
+  },
+  "judge_completion_by_keyframe": {
+    "positive_conditions_all": [
+      {
+        "id": "KeyframeShowsDeletedState",
+        "desc": "关键帧显示删除操作后的状态（项目从列表中消失，列表已更新），而非仅删除确认对话框"
+      },
+      {
+        "id": "EvidenceOfDeletion",
+        "desc": "关键帧中可见删除证据（目标项目已消失/列表更新/删除成功提示/历史记录已清空/空列表状态）"
+      },
+      {
+        "id": "IntentMatched",
+        "desc": "删除的项目与任务意图一致（如第2件商品/第一件商品/指定项目/历史记录等匹配）"
+      },
+      {
+        "id": "StateProvable",
+        "desc": "删除状态可被验证（列表更新，项目消失，数量减少，历史记录已清空等可见）"
+      }
+    ],
+    "negative_veto_any": [
+      {
+        "id": "OnlyConfirmationDialog",
+        "desc": "所有关键帧不包含删除后的列表状态页面（列表更新/项目消失/删除成功提示），仅包含删除确认对话框"
+      },
+      {
+        "id": "OnlySelectionPage",
+        "desc": "所有关键帧不包含删除后的列表状态页面（列表更新/项目消失/删除成功提示），仅包含选择页"
+      },
+      {
+        "id": "ItemStillExists",
+        "desc": "所有关键帧中目标项目仍在列表中，未显示删除后的状态"
+      },
+      {
+        "id": "IntentMismatched",
+        "desc": "所有关键帧显示的删除项目都与任务意图不一致（如删除的不是指定的项目）"
+      },
+      {
+        "id": "InsufficientEvidence",
+        "desc": "所有关键帧的关键信息都被遮挡/过于模糊/缺少列表更新状态，导致无法验证已删除"
+      }
+    ],
+    "output": {
+      "status": ["completed", "not_completed", "uncertain_need_better_keyframe"],
+      "required_reason": "命中或未命中上述条件/否决项的简短解释"
+    }
+  }
+}

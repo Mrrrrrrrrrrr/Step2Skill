@@ -1,0 +1,70 @@
+{
+  "category": "search_query",
+  "goal": "在GUI序列（images+actions）中：先选关键帧，再基于关键帧判断查询搜索任务是否完成（结果与意图/约束匹配）。",
+  "pipeline": [
+    "select_keyframe",
+    "judge_completion_by_keyframe"
+  ],
+  "select_keyframe": {
+    "must_include": [
+      "最后一个action对应的页面状态",
+      "查询已触发的结果页（列表/信息展示），而非联想/热搜/历史",
+      "可验证的查询证据（搜索词/已选筛选/排序标签至少其一可见）"
+    ],
+    "prefer": [
+      "同时可见：查询证据 + 已选条件标签 + 结果列表头部/类目",
+      "结果条目包含可读字段（用于验证约束，如日期/地点/排序指标）"
+    ],
+    "avoid": [
+      "搜索建议/热搜/历史记录页",
+      "无查询证据的列表页（看不到搜索词/筛选/排序）",
+      "被弹窗/键盘遮挡导致无法验证条件与结果关系的页面"
+    ]
+  },
+  "judge_completion_by_keyframe": {
+    "positive_conditions_all": [
+      {
+        "id": "KeyframeIsResultPage",
+        "desc": "关键帧为查询触发后的结果页（列表或信息展示）"
+      },
+      {
+        "id": "EvidenceOfQuery",
+        "desc": "关键帧中可见查询证据（搜索词或已选筛选/排序）"
+      },
+      {
+        "id": "IntentRelevant",
+        "desc": "结果域与意图强相关（不跑偏到无关品类/频道）"
+      },
+      {
+        "id": "ConstraintsProvable",
+        "desc": "任务中明确要求的关键约束（如日期/地点/筛选/排序）在关键帧中可被验证（标签或结果字段）"
+      }
+    ],
+    "negative_veto_any": [
+      {
+        "id": "SuggestionInsteadOfResults",
+        "desc": "关键帧为联想/热搜/历史而非结果集合"
+      },
+      {
+        "id": "SemanticIrrelevantResults",
+        "desc": "结果与查询意图明显不相关（有列表但跑偏）"
+      },
+      {
+        "id": "ConstraintMissingOrNotProvable",
+        "desc": "明确约束在关键帧中缺失或无法验证"
+      },
+      {
+        "id": "InsufficientEvidence",
+        "desc": "关键帧看不到查询证据且无法证明结果由该查询产生"
+      }
+    ],
+    "output": {
+      "status": [
+        "completed",
+        "not_completed",
+        "uncertain_need_better_keyframe"
+      ],
+      "required_reason": "命中或未命中上述条件/否决项的简短解释"
+    }
+  }
+}
