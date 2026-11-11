@@ -1,0 +1,21 @@
+{
+  "desc": "融合单次评估管道（Lite 主导 + 轨迹失败定位）：全图输入，四分类 task_status（perfect/fair_enough/failed/env_error），环境错误优先判定，成功类强一致 traj/comp=1。",
+  "examples": [
+    "python main.py data/your_tasks.jsonl --pipeline-json pipeline/pipeline_lite_trajectory_allimg_unified_binary.json --model doubao-seed-1.8 --no-qa",
+    "python test_service.py --pipeline-json pipeline/pipeline_lite_trajectory_allimg_unified_binary.json",
+    "python main.py data/your_tasks.jsonl --eval-profile lite_trajectory_allimg_unified_binary --model doubao-seed-1.8 --no-qa"
+  ],
+  "preset": "lite_trajectory_allimg_unified_binary",
+  "eval_lite_mode": true,
+  "output_lite_mode": false,
+  "final_judgment_mode": "lite_plus_trajectory_all_images_unified_binary",
+  "lite_include_action_list": true,
+  "lite_action_chain_source": "raw",
+  "unified_scope": "lite_end_only",
+  "use_keyframe_images": true,
+  "use_qa_images": false,
+  "no_qa": true,
+  "keep_last_action": true,
+  "skip_takeover": true,
+  "compress_quality": 0.6
+}

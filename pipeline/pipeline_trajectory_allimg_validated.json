@@ -1,0 +1,20 @@
+{
+  "desc": "与 pipeline_trajectory_allimg_raw 相同，但 action 链使用校验后的 corrected action。除 is_trajectory_correct 外，新增输出首次未纠正偏航步骤 first_deviation_step（0-based）与 first_deviation_reason。JSON 内已开启 use_keyframe_images；若仅用 --eval-profile，请同时加 --use-keyframe-images。",
+  "examples": [
+    "python main.py data/your_tasks.jsonl --pipeline-json pipeline/pipeline_trajectory_allimg_validated.json --model doubao-seed-1.8 --no-qa",
+    "python test_service.py --pipeline-json pipeline/pipeline_trajectory_allimg_validated.json",
+    "python main.py data/your_tasks.jsonl --eval-profile trajectory_allimg_validated --use-keyframe-images --model doubao-seed-1.8 --no-qa"
+  ],
+  "preset": "trajectory_allimg_validated",
+  "eval_lite_mode": true,
+  "output_lite_mode": false,
+  "final_judgment_mode": "trajectory_correctness_all_images",
+  "lite_include_action_list": true,
+  "lite_action_chain_source": "validated",
+  "unified_scope": "lite_end_only",
+  "use_keyframe_images": true,
+  "use_qa_images": false,
+  "no_qa": true,
+  "skip_takeover": true,
+  "compress_quality": 0.6
+}

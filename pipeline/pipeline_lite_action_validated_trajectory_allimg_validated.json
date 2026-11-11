@@ -1,0 +1,21 @@
+{
+  "desc": "Action 校验后同时输出 Lite 综合任务完成度与轨迹全图正确性（并集字段）。",
+  "examples": [
+    "python main.py data/your_tasks.jsonl --pipeline-json pipeline/pipeline_lite_action_validated_trajectory_allimg_validated.json --model doubao-seed-1.8 --no-qa",
+    "python test_service.py --pipeline-json pipeline/pipeline_lite_action_validated_trajectory_allimg_validated.json",
+    "python main.py data/your_tasks.jsonl --eval-profile lite_action_validated+trajectory_allimg_validated --model doubao-seed-1.8 --no-qa"
+  ],
+  "preset": "lite_action_validated+trajectory_allimg_validated",
+  "eval_lite_mode": true,
+  "output_lite_mode": false,
+  "final_judgment_mode": "lite_plus_trajectory_all_images",
+  "lite_include_action_list": true,
+  "lite_action_chain_source": "validated",
+  "unified_scope": "lite_end_only",
+  "use_keyframe_images": true,
+  "use_qa_images": false,
+  "no_qa": true,
+  "skip_takeover": true,
+  "keep_last_action": true,  
+  "compress_quality": 0.6
+}

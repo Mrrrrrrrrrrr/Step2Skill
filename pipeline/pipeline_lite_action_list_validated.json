@@ -1,0 +1,20 @@
+{
+  "desc": "在 pipeline_lite_action_list 基础上，action 列表使用校验后的 corrected action（含二次校验），而非原始 raw action。",
+  "examples": [
+    "python main.py data/your_tasks.jsonl --pipeline-json pipeline/pipeline_lite_action_list_validated.json --model doubao-seed-1.8 --no-qa",
+    "python test_service.py --pipeline-json pipeline/pipeline_lite_action_list_validated.json",
+    "python main.py data/your_tasks.jsonl --eval-profile lite+action_list_validated --model doubao-seed-1.8 --no-qa"
+  ],
+  "preset": "lite+action_list_validated",
+  "eval_lite_mode": true,
+  "output_lite_mode": true,
+  "final_judgment_mode": "unified_single",
+  "lite_include_action_list": true,
+  "lite_action_chain_source": "validated",
+  "unified_scope": "lite_end_only",
+  "use_keyframe_images": false,
+  "use_qa_images": false,
+  "no_qa": true,
+  "skip_takeover": true,
+  "compress_quality": 0.6
+}

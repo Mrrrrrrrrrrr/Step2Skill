@@ -1,0 +1,19 @@
+{
+  "desc": "错因分析管道：对 filtered failed/fair_enough/env_error 样本传入全图、原始 action/thought 与接管信息，如果filter数据是部分，则只输出一级/二级错因和分类理由，不判断任务正确性；如果filter全部数据，则判断任务正确性，并输出一级/二级错因和分类理由。",
+  "examples": [
+    "python main.py --input data/tmp/回流数据评估情况.xlsx --pipeline-json pipeline/pipeline_error_cause_analysis.json --model seed_free --batch-size 200 --knowledge knowledge_base_ali --max-tasks 10000 --filter failed,fair_enough,env_error,perfect"
+  ],
+  "preset": "error_cause_analysis",
+  "eval_lite_mode": true,
+  "output_lite_mode": false,
+  "final_judgment_mode": "error_cause_analysis",
+  "lite_include_action_list": true,
+  "lite_action_chain_source": "validated_thought",
+  "unified_scope": "lite_end_only",
+  "use_keyframe_images": true,
+  "use_qa_images": false,
+  "no_qa": true,
+  "keep_last_action": true,
+  "skip_takeover": true,
+  "compress_quality": 0.6
+}
