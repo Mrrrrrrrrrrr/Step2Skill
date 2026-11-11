@@ -1,0 +1,21 @@
+{
+  "desc": "融合单次评估管道（Lite 主导 + 轨迹失败定位，action 校验版）：全图输入，输出二分类（0/1）且保证任务成功与轨迹/完成度判定强一致；操作链使用校验后的 action（lite_action_chain_source=validated）。",
+  "examples": [
+    "python main.py data/your_tasks.jsonl --pipeline-json pipeline/pipeline_lite_trajectory_allimg_unified_binary_action_validated.json --model doubao-seed-1.8 --no-qa",
+    "python test_service.py --pipeline-json pipeline/pipeline_lite_trajectory_allimg_unified_binary_action_validated.json",
+    "python main.py data/your_tasks.jsonl --eval-profile lite_trajectory_allimg_unified_binary_action_validated --model doubao-seed-1.8 --no-qa"
+  ],
+  "preset": "lite_trajectory_allimg_unified_binary_action_validated",
+  "eval_lite_mode": true,
+  "output_lite_mode": false,
+  "final_judgment_mode": "lite_plus_trajectory_all_images_unified_binary",
+  "lite_include_action_list": true,
+  "lite_action_chain_source": "validated",
+  "unified_scope": "lite_end_only",
+  "use_keyframe_images": true,
+  "use_qa_images": false,
+  "no_qa": true,
+  "keep_last_action": true,
+  "skip_takeover": true,
+  "compress_quality": 0.6
+}

@@ -1,0 +1,20 @@
+{
+  "desc": "全量上下文输入，但终判走单次 unified prompt，输出 is_task_success（output_lite_mode），类似 lite 的预测接口形态。",
+  "examples": [
+    "python main.py data/your_tasks.jsonl --pipeline-json pipeline/pipeline_full_unified.json --model doubao-seed-1.8 --no-qa",
+    "python test_service.py --pipeline-json pipeline/pipeline_full_unified.json",
+    "python main.py data/your_tasks.jsonl --eval-profile full_unified --model doubao-seed-1.8 --no-qa"
+  ],
+  "preset": "full_unified",
+  "eval_lite_mode": false,
+  "output_lite_mode": true,
+  "final_judgment_mode": "unified_single",
+  "lite_include_action_list": false,
+  "lite_action_chain_source": "raw",
+  "unified_scope": "full_context",
+  "use_keyframe_images": false,
+  "use_qa_images": false,
+  "no_qa": true,
+  "skip_takeover": true,
+  "compress_quality": 0.6
+}

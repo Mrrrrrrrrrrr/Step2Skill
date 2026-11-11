@@ -1,0 +1,20 @@
+{
+  "desc": "在 pipeline_lite 基础上，unified 综合 prompt 中附带整条 trajectory 的 raw action 列表。",
+  "examples": [
+    "python main.py data/your_tasks.jsonl --pipeline-json pipeline/pipeline_lite_action_list.json --model doubao-seed-1.8 --no-qa",
+    "python test_service.py --pipeline-json pipeline/pipeline_lite_action_list.json",
+    "python main.py data/your_tasks.jsonl --eval-profile lite+action_list --model doubao-seed-1.8 --no-qa"
+  ],
+  "preset": "lite+action_list",
+  "eval_lite_mode": true,
+  "output_lite_mode": true,
+  "final_judgment_mode": "unified_single",
+  "lite_include_action_list": true,
+  "lite_action_chain_source": "raw",
+  "unified_scope": "lite_end_only",
+  "use_keyframe_images": false,
+  "use_qa_images": false,
+  "no_qa": true,
+  "skip_takeover": true,
+  "compress_quality": 0.6
+}
