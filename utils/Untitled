@@ -1,5 +1,0 @@
-conda activate zj_base310 && cd /var/code/zhaoj/orm && python utils/auto_optimize_lite_prompt.py \
-  --table "data/seed_free/results (1).xlsx" \
-  --jsonl "data/seed_free/lite+action_list/2026032202055788_predicted.jsonl" \
-  --data-dir "data/seed_free/lite+action_list" \
-  --save-prompts /var/code/zhaoj/orm/prompts/tmp
