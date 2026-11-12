@@ -1,4 +1,4 @@
-# Step2Skill: From Local Failures to Transferable GUI Skills
+# A Little Goes a Long Way: From Local Failures to Transferable GUI Skills
 
 This repository is the anonymous code release for the CVPR submission **"A Little Goes a Long Way: From Local Failures to Transferable GUI Skills"**.
 
